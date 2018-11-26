@@ -3,5 +3,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #242f69;
+  height:fit-content;
+  min-height: 100vh;
  
 }

@@ -70,10 +70,5 @@ class WeatherForADay extends Component {
     );
   }
 }
-function mapStateToProps(state, ownProps) {
-  return {
-    weather: state.weather.list
-  };
-}
 
-export default connect(mapStateToProps)(withStyles(styles)(WeatherForADay));
+export default withStyles(styles)(WeatherForADay);

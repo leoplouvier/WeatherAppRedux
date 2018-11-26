@@ -21,23 +21,23 @@ const styles = {
 
 function SimpleCard(props) {
   const { classes } = props;
-  var image = require("./img/sun.png");
+  var image = require("../img/sun.png");
   var alt='sunny'
   switch(props.weather){
       case 'Clear':
-        image=require('./img/sun.png')
+        image=require('../img/sun.png')
         alt='sunny'
         break;
       case 'Clouds':
-        image=require('./img/cloudy.png')
+        image=require('../img/cloudy.png')
         alt='cloudy'
         break;
       case 'Rain':
-        image=require('./img/rain.png')
+        image=require('../img/rain.png')
         alt='rainy'
         break;
         case 'Snow':
-        image=require('./img/snow.png')
+        image=require('../img/snow.png')
         alt='snowy'
         break;
       default:

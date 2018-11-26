@@ -8,14 +8,14 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
-import store from './Redux/Store.js';
-import { changeCity } from './Redux/actions.js';
+import store from '../Redux/Store.js';
+import { changeCity } from '../Redux/actions.js';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import SearchIcon from '@material-ui/icons/Search';
 
 
 
-const suggestions = require("./city.list.json")
+const suggestions = require("../city.list.json")
 
 function renderInputComponent(inputProps) {
   const { classes, inputRef = () => {}, ref, ...other } = inputProps;

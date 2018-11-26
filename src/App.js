@@ -1,17 +1,16 @@
 import React, { Component } from "react";
-import "./App.css";
-import { connect } from "react-redux";
-import CitySearch from "./CitySearch";
+import "./style/App.css";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import Icon from "@material-ui/icons/Send";
 import { withStyles } from "@material-ui/core";
 import store from "./Redux/Store";
 import { getWeather } from "./Redux/actions";
-import WeatherForADay from "./WeatherForADay";
+import WeatherForADay from "./Component/WeatherForADay";
 import Divider from "@material-ui/core/Divider";
-import Header from "./Header";
+import Header from "./Component/Header";
 import LocationIcon from "@material-ui/icons/LocationOn";
+import withWeatherInfos from "./Redux/withWeatherInfos";
+import Icon from "@material-ui/icons/ExploreOutlined";
 
 const styles = theme => ({
   button: {
@@ -61,21 +60,21 @@ class App extends Component {
     return (
       <div className="App">
         <Header submitCity={() => this.submitCity()} />
-        <div style={{ width: "100%" }}>
-          {this.state.chosenCity !== "" && (
+        <div style={{ width: "100%" , marginTop:'64px'}}>
+          {this.state.chosenCity !== "" ? (
             <div>
               <div
                 style={{
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "center",
-                  alignItems: "baseline"
+                  alignItems: "baseline",
+                  backgroundColor:'rgba(0,0,0,0.25)'
                 }}
               >
                 <Typography
-                  color="primary"
                   variant="display2"
-                  style={{ marginBottom: 3, marginTop: 50 }}
+                  style={{ marginBottom: 3, marginTop: 50, color:'white' }}
                 >
                   {this.state.chosenCity}
                 </Typography>
@@ -89,16 +88,27 @@ class App extends Component {
                   <LocationIcon />
                 </Button>
               </div>
-              <Divider style={{ marginBottom: "20px" }} />
+              <Divider style={{ marginBottom: "20px", backgroundColor:'black' }} />
             </div>
-          )}
+          ):(
+            <div style={{position: 'absolute',top: '50%', left: '50%', transform: 'translate(-50%, -50%)', color:'#d1d6ef'}}>
+              <Icon style={{fontSize: '300px'}}/>
+              <Typography
+                  variant="display1"
+                  style={{ marginBottom: 3, marginTop: 50, color:'#d1d6ef'}}
+                >
+                  Search for a city to see its weather for the next 5 days
+                </Typography>
+            </div>
+          )
+          }
           {this.props.weather.length !== 0 && (
             <div style={{ width: "fit-content", margin: "auto" }}>
-              <WeatherForADay date={today} />
-              <WeatherForADay date={tomorrow} />
-              <WeatherForADay date={twoDay} />
-              <WeatherForADay date={threeDay} />
-              <WeatherForADay date={fourDay} />
+              <WeatherForADay date={today} weather={this.props.weather}/>
+              <WeatherForADay date={tomorrow} weather={this.props.weather}/>
+              <WeatherForADay date={twoDay} weather={this.props.weather}/>
+              <WeatherForADay date={threeDay} weather={this.props.weather}/>
+              <WeatherForADay date={fourDay} weather={this.props.weather}/>
             </div>
           )}
         </div>
@@ -107,14 +117,4 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
-    date: state.date,
-    city: state.city,
-    cityId: state.cityId,
-    weather: state.weather.list,
-    cityInfos: state.weather.city
-  };
-}
-
-export default connect(mapStateToProps)(withStyles(styles)(App));
+export default withWeatherInfos(withStyles(styles)(App));
